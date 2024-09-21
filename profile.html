@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+
+        <!-- Profile Picture -->
+        <div class="profile-picture">
+            <img id="profile-img" src="default-avatar.png" alt="Profile Picture">
+            <input type="file" id="upload-img" accept="image/*">
+        </div>
+
+        <!-- User Information Form -->
+        <form id="profile-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" value="JohnDoe123">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="johndoe@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" value="password123">
+            </div>
+
+            <!-- Account Settings -->
+            <div class="form-group">
+                <label for="theme-selector">Theme</label>
+                <select id="theme-selector">
+                    <option value="light">Light Mode</option>
+                    <option value="dark">Dark Mode</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="notifications">Notifications</label>
+                <input type="checkbox" id="notifications" checked>
+                <label for="notifications">Enable Notifications</label>
+            </div>
+
+            <!-- Save Button -->
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+        // Image Upload Preview
+        const uploadImg = document.getElementById('upload-img');
+        const profileImg = document.getElementById('profile-img');
+
+        uploadImg.addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                profileImg.src = reader.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        // Theme Selector
+        const themeSelector = document.getElementById('theme-selector');
+        const body = document.body;
+
+        themeSelector.addEventListener('change', function() {
+            const theme = themeSelector.value;
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+            }
+        });
+
+        // Handle Form Submission
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+            // Additional functionality to update profile can go here
+        });
+    </script>
+</body>
+</html>

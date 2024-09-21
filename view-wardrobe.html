@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Wardrobe</title>
+    <link rel="stylesheet" href="view-wardrobe.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Wardrobe</h1>
+        
+        <!-- Filters -->
+        <div class="filters">
+            <label for="categoryFilter">Category:</label>
+            <select id="categoryFilter" onchange="filterWardrobe()">
+                <option value="all">All</option>
+                <option value="tops">Tops</option>
+                <option value="bottoms">Bottoms</option>
+                <option value="outerwear">Outerwear</option>
+                <option value="dresses">Dresses</option>
+                <option value="traditionalWear">Traditional Wear</option>
+                <option value="footwear">Footwear</option>
+                <option value="accessories">Accessories</option>
+            </select>
+
+            <label for="colorFilter">Color:</label>
+            <select id="colorFilter" onchange="filterWardrobe()">
+                <option value="all">All Colors</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+                <option value="grey">Grey</option>
+            </select>
+        </div>
+
+        <!-- Wardrobe Items List -->
+        <div class="wardrobe-list" id="wardrobeList">
+            <!-- Clothes items will be dynamically generated here -->
+        </div>
+
+        <!-- Buttons to add new item -->
+        <button id="addNewItemBtn" onclick="addNewItem()">Add New Item</button>
+    </div>
+
+    <script src="view-wardrobe.js"></script>
+</body>
+</html>

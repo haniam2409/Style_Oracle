@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Screen</title>
+    <link rel="stylesheet" href="screen-setting.css">
+</head>
+<body class="light-mode">
+    <div class="container">
+        <h1>Settings</h1>
+
+        <!-- Theme Selector -->
+        <div class="form-group">
+            <label for="theme-selector">Theme</label>
+            <select id="theme-selector">
+                <option value="light">Light Mode</option>
+                <option value="dark">Dark Mode</option>
+            </select>
+        </div>
+
+        <!-- Notifications Settings -->
+        <div class="form-group">
+            <label for="notifications">Notifications</label>
+            <input type="checkbox" id="notifications" name="notifications" checked>
+            <label for="notifications">Enable Notifications</label>
+        </div>
+
+        <!-- Logout Button -->
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <script>
+        // Theme Selector Script
+        const themeSelector = document.getElementById('theme-selector');
+        const body = document.body;
+
+        themeSelector.addEventListener('change', function() {
+            const theme = themeSelector.value;
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+            }
+        });
+
+        // Logout Button Action
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            alert("You have been logged out.");
+            // You can redirect the user to the login page or perform logout functionality
+        });
+    </script>
+</body>
+</html>

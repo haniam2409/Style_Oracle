@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Female Wardrobe Input Screen</title>
+    <link rel="stylesheet" href="wardrobe-female.css"> <!-- Link to your external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Add Clothes to Your Wardrobe</h1>
+        <form id="wardrobe-form">
+            <div class="form-group">
+                <label for="category">Select Clothing Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="tops">Tops</option>
+                    <option value="bottoms">Bottoms</option>
+                    <option value="outerwear">Outerwear</option>
+                    <option value="traditionalWear">Traditional Wear</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="footwear">Footwear</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="type">Select Type</label>
+                <select id="type" name="type" required>
+                    <!-- Options will be dynamically populated based on category -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="color">Select Color</label>
+                <select id="color" name="color" required>
+                    <!-- Options will be dynamically populated based on type -->
+                </select>
+            </div>
+            
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to dynamically populate the types and colors based on category selection
+
+        const typesByCategory = {
+            tops: [
+                { type: "track", colors: ["White", "Black", "Blue", "Red", "Pink", "Green", "Yellow"] },
+                { type: "T-shirt", colors: ["White", "Black", "Grey", "Yellow"] },
+                { type: "Crop Top", colors: ["Pink", "Black", "Red"] },
+                { type: "Kurti", colors: ["Blue", "Red", "Green", "Yellow"] },
+                { type: "Tunic", colors: ["White", "Black", "Grey"] },
+                { type: "Tank Top", colors: ["Black", "White", "Red"] }
+            ],
+            bottoms: [
+                { type: "Jeans", colors: ["Blue", "Black", "Grey"] },
+                { type: "Palazzo", colors: ["Black", "Beige", "Navy"] },
+                { type: "Trousers", colors: ["Black", "Navy", "Grey"] },
+                { type: "Leggings", colors: ["Black", "Navy", "Grey"] },
+                { type: "Shalwar", colors: ["White", "Black", "Grey"] }
+            ],
+            outerwear: [
+                { type: "Blazer", colors: ["Black", "Grey", "Navy"] },
+                { type: "Cardigan", colors: ["Camel", "Maroon", "Pink"] },
+                { type: "Coat", colors: ["Black", "Grey", "Camel"] },
+                { type: "Jacket", colors: ["Black", "Blue", "Grey"] },
+                { type: "Shrug", colors: ["Black", "Grey", "Red"] },
+                { type: "Shawl", colors: ["Black", "Brown", "Grey"] }
+            ],
+            traditionalWear: [
+                { type: "Kameez", colors: ["White", "Black", "Cream", "Red", "Green"] },
+                { type: "Shalwar", colors: ["White", "Black", "Grey"] },
+                { type: "Dupatta", colors: ["White", "Black", "Red", "Blue"] },
+                { type: "Lehenga", colors: ["Red", "Blue", "Maroon"] },
+                { type: "Saree", colors: ["Red", "Black", "Blue", "Pink"] },
+                { type: "Gharara", colors: ["Cream", "Red", "Green"] },
+                { type: "Angrakha", colors: ["White", "Black", "Maroon"] }
+            ],
+            dresses: [
+                { type: "Casual Dress", colors: ["White", "Black", "Pink"] },
+                { type: "Maxi Dress", colors: ["Red", "Black", "Blue"] },
+                { type: "Party Dress", colors: ["Red", "Pink", "Gold"] },
+                { type: "Evening Gown", colors: ["Black", "Navy", "Maroon"] },
+                { type: "Midi Dress", colors: ["Green", "Blue", "Red"] }
+            ],
+            footwear: [
+                { type: "Heels", colors: ["Black", "Nude", "Red"] },
+                { type: "Flats", colors: ["Black", "Brown", "Tan"] },
+                { type: "Sandals", colors: ["White", "Black", "Brown"] },
+                { type: "Sneakers", colors: ["White", "Black", "Grey"] },
+                { type: "Boots", colors: ["Black", "Brown", "Tan"] }
+            ],
+            accessories: [
+                { type: "Earrings", colors: ["Gold", "Silver", "Black"] },
+                { type: "Necklace", colors: ["Gold", "Silver"] },
+                { type: "Bracelet", colors: ["Gold", "Silver", "Pink"] },
+                { type: "Ring", colors: ["Gold", "Silver", "Red"] },
+                { type: "Watch", colors: ["Silver", "Gold", "Black"] },
+                { type: "Belt", colors: ["Black", "Brown"] },
+                { type: "Scarf", colors: ["Red", "Blue", "White"] }
+            ]
+        };
+
+        document.getElementById('category').addEventListener('change', function() {
+            const category = this.value;
+            const typeSelect = document.getElementById('type');
+            const colorSelect = document.getElementById('color');
+
+            typeSelect.innerHTML = '<option value="">Select Type</option>';
+            colorSelect.innerHTML = '<option value="">Select Color</option>';
+
+            if (category) {
+                typesByCategory[category].forEach(item => {
+                    typeSelect.innerHTML += `<option value="${item.type}">${item.type}</option>`;
+                });
+            }
+        });
+
+        document.getElementById('type').addEventListener('change', function() {
+            const category = document.getElementById('category').value;
+            const type = this.value;
+            const colorSelect = document.getElementById('color');
+
+            colorSelect.innerHTML = '<option value="">Select Color</option>';
+
+            if (category && type) {
+                const colors = typesByCategory[category].find(item => item.type === type).colors;
+                colors.forEach(color => {
+                    colorSelect.innerHTML += `<option value="${color}">${color}</option>`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

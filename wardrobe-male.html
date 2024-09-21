@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Male Wardrobe Input Screen</title>
+    <link rel="stylesheet" href="wardrobe-male.css"> <!-- Link to your external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Add Clothes to Your Wardrobe</h1>
+        <form id="wardrobe-form">
+            <div class="form-group">
+                <label for="category">Select Clothing Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="tops">Tops</option>
+                    <option value="bottoms">Bottoms</option>
+                    <option value="outerwear">Outerwear</option>
+                    <option value="traditionalWear">Traditional Wear</option>
+                    <option value="footwear">Footwear</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="type">Select Type</label>
+                <select id="type" name="type" required>
+                    <!-- Options will be dynamically populated based on category -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="color">Select Color</label>
+                <select id="color" name="color" required>
+                    <!-- Options will be dynamically populated based on type -->
+                </select>
+            </div>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        const typesByCategory = {
+            tops: [
+                { type: "Dress Shirt", colors: ["White", "Black", "Blue", "Grey"] },
+                { type: "Casual Shirt", colors: ["Red", "Green", "Blue", "Black"] },
+                { type: "Polo Shirt", colors: ["White", "Navy", "Grey"] },
+                { type: "T-shirt", colors: ["Black", "White", "Grey", "Red"] },
+                { type: "Henley", colors: ["Grey", "Blue", "Black"] }
+            ],
+            bottoms: [
+                { type: "Formal Pants", colors: ["Black", "Grey", "Navy"] },
+                { type: "Chinos", colors: ["Khaki", "Navy", "Beige", "Olive"] },
+                { type: "Jeans", colors: ["Blue", "Black", "Grey"] },
+                { type: "Cargo Pants", colors: ["Khaki", "Green", "Black"] }
+            ],
+            outerwear: [
+                { type: "Blazer", colors: ["Black", "Grey", "Navy"] },
+                { type: "Coat", colors: ["Camel", "Black", "Olive"] },
+                { type: "Jacket", colors: ["Black", "Blue", "Grey"] },
+                { type: "Hoodie", colors: ["Black", "Grey", "Maroon"] },
+                { type: "Sweater", colors: ["Navy", "Grey", "Olive"] },
+                { type: "Waistcoat", colors: ["Black", "Grey", "Blue"] },
+                { type: "Shawl", colors: ["Black", "Brown", "Grey"] }
+            ],
+            traditionalWear: [
+                { type: "Kameez Shalwar", colors: ["Black", "White", "Navy", "Cream"] },
+                { type: "Sherwani", colors: ["Black", "White", "Maroon"] },
+                { type: "Kurta", colors: ["Black", "White", "Blue", "Grey"] },
+                { type: "Waistcoat", colors: ["Black", "Grey", "Blue"] }
+            ],
+            footwear: [
+                { type: "Formal Shoes", colors: ["Black", "Brown"] },
+                { type: "Loafers", colors: ["Black", "Brown", "Tan"] },
+                { type: "Sandals", colors: ["Black", "Brown"] },
+                { type: "Sneakers", colors: ["Black", "White", "Grey"] },
+                { type: "Boots", colors: ["Black", "Brown", "Tan"] }
+            ],
+            accessories: [
+                { type: "Belt", colors: ["Black", "Brown"] },
+                { type: "Tie", colors: ["Black", "Blue", "Red", "Grey"] },
+                { type: "Watch", colors: ["Silver", "Gold", "Black"] },
+                { type: "Cufflinks", colors: ["Silver", "Gold"] },
+                { type: "Pocket Square", colors: ["White", "Red", "Blue"] }
+            ]
+        };
+
+        document.getElementById('category').addEventListener('change', function() {
+            const category = this.value;
+            const typeSelect = document.getElementById('type');
+            const colorSelect = document.getElementById('color');
+
+            typeSelect.innerHTML = '<option value="">Select Type</option>';
+            colorSelect.innerHTML = '<option value="">Select Color</option>';
+
+            if (category) {
+                typesByCategory[category].forEach(item => {
+                    typeSelect.innerHTML += `<option value="${item.type}">${item.type}</option>`;
+                });
+            }
+        });
+
+        document.getElementById('type').addEventListener('change', function() {
+            const category = document.getElementById('category').value;
+            const type = this.value;
+            const colorSelect = document.getElementById('color');
+
+            colorSelect.innerHTML = '<option value="">Select Color</option>';
+
+            if (category && type) {
+                const colors = typesByCategory[category].find(item => item.type === type).colors;
+                colors.forEach(color => {
+                    colorSelect.innerHTML += `<option value="${color}">${color}</option>`;
+                });
+            }
+        });
+
+        document.getElementById('wardrobe-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const category = document.getElementById('category').value;
+            const type = document.getElementById('type').value;
+            const color = document.getElementById('color').value;
+
+            const wardrobeData = {
+                category,
+                type,
+                color
+            };
+
+            localStorage.setItem('wardrobeData', JSON.stringify(wardrobeData));
+            window.location.href = 'preview.html';  // Redirect to the preview page
+        });
+    </script>
+</body>
+</html>

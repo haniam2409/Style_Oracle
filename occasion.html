@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Occasion</title>
+    <link rel="stylesheet" href="occasion.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Select an Occasion</h1>
+        <form id="occasion-form">
+            <div class="form-group">
+                <label for="occasion">Choose Occasion Category</label>
+                <select id="occasion" name="occasion" required>
+                    <option value="">Select Occasion</option>
+                    <option value="Formal Occasions">Formal Occasions</option>
+                    <option value="Casual Occasions">Casual Occasions</option>
+                    <option value="Traditional Occasions">Traditional/Cultural Occasions</option>
+                    <option value="Party Occasions">Party Occasions</option>
+                    <option value="Seasonal Occasions">Seasonal Occasions</option>
+                    <option value="Evening Events">Evening Events</option>
+                    <option value="Family Gatherings">Family Gatherings</option>
+                    <option value="Outdoor Events">Outdoor Events</option>
+                    <option value="Special Life Events">Special Life Events</option>
+                    <option value="Miscellaneous Events">Miscellaneous Events</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="type">Select Event Type</label>
+                <select id="type" name="type" required>
+                    <!-- Types will be dynamically populated based on occasion category -->
+                </select>
+            </div>
+            
+            <button type="submit">Proceed</button>
+        </form>
+    </div>
+
+    <script>
+        const occasionData = {
+            "Formal Occasions": ["Office Meeting", "Business Conference", "Job Interview", "Formal Dinner", "Awards Ceremony"],
+            "Casual Occasions": ["Day Outing", "Picnic", "Shopping Trip", "Casual Get-together"],
+            "Traditional Occasions": ["Eid", "Weddings", "Christmas", "Engagement", "Cultural Festival"],
+            "Party Occasions": ["Birthday Party", "Cocktail Party", "House Party", "New Year’s Eve Party"],
+            "Seasonal Occasions": ["Summer BBQ", "Winter Holiday Party", "Spring Festival", "Fall Harvest"],
+            "Evening Events": ["Dinner Date", "Evening Gala", "Night Party", "Concert"],
+            "Family Gatherings": ["Family Reunion", "Festive Dinner", "Anniversary Celebration"],
+            "Outdoor Events": ["Beach Party", "Hiking Trip", "Sports Event"],
+            "Special Life Events": ["Graduation Ceremony", "Prom", "Farewell Party"],
+            "Miscellaneous Events": ["Charity Event", "Garden Party", "Pool Party"]
+        };
+
+        document.getElementById('occasion').addEventListener('change', function() {
+            const occasion = this.value;
+            const typeSelect = document.getElementById('type');
+            
+            typeSelect.innerHTML = '<option value="">Select Event Type</option>';
+            
+            if (occasion && occasionData[occasion]) {
+                occasionData[occasion].forEach(type => {
+                    typeSelect.innerHTML += `<option value="${type}">${type}</option>`;
+                });
+            }
+        });
+
+        document.getElementById('occasion-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const occasion = document.getElementById('occasion').value;
+            const type = document.getElementById('type').value;
+
+            // Store selected data in localStorage
+            localStorage.setItem('occasion', occasion);
+            localStorage.setItem('type', type);
+            
+            alert("Data stored! You can now go to the preview page.");
+            // Optionally, redirect to preview.html after storing
+            // window.location.href = 'preview.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fce4ec; /* Light pink background */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #e91e63; /* Pink color for the heading */
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+select,
+input[type="color"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e91e63; /* Pink border */
+    border-radius: 4px;
+    background-color: #fce4ec; /* Light pink background for inputs */
+    font-size: 16px;
+}
+
+select:focus,
+input[type="color"]:focus {
+    border-color: #d81b60; /* Darker pink on focus */
+    outline: none;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #e91e63; /* Pink background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #d81b60; /* Darker pink on hover */
+}
+
+button:focus {
+    outline: none;
+}
+
+.container {
+    background: linear-gradient(to bottom, #f8bbd0, #fce4ec); /* Gradient for container */
+}

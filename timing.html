@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Time of Event</title>
+    <link rel="stylesheet" href="timing.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Select the Time of the Event</h1>
+        <form id="time-form">
+            <div class="form-group">
+                <label>Select Time:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="time" value="morning" required> Morning
+                    </label>
+                    <label>
+                        <input type="radio" name="time" value="evening" required> Evening
+                    </label>
+                    <label>
+                        <input type="radio" name="time" value="night" required> Night
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit">Next</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('time-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedTime = document.querySelector('input[name="time"]:checked').value;
+
+            // Get existing times from localStorage
+            let times = JSON.parse(localStorage.getItem('times')) || [];
+            
+            // Add the new time and keep only the last 7
+            times.push(selectedTime);
+            if (times.length > 7) {
+                times.shift(); // Remove the oldest time
+            }
+            localStorage.setItem('times', JSON.stringify(times));
+
+            alert("You selected: " + selectedTime);
+            // You can add a redirect here if needed
+        });
+    </script>
+</body>
+</html>

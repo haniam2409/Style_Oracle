@@ -1,0 +1,113 @@
+/* CSS Variables */
+:root {
+    --background-image: url('bg2.jpg'); /* Replace with your background image URL */
+    --background-blur: 10px; /* Adjust the blur amount as needed */
+    --button-color: #007bff; /* Blue color */
+    --button-hover-color: #0056b3; /* Darker blue color for hover effect */
+    --font-family: 'Arial', sans-serif; /* Default font-family */
+    --unique-font: 'Courier New', Courier, monospace; /* Unique font for header */
+    --logo-size: 100px; /* Size of the logo */
+}
+
+/* Basic reset and styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: #333;
+    overflow: hidden;
+}
+
+/* Container styling */
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Background image styling */
+.background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-position: center;
+    filter: blur(var(--background-blur));
+    z-index: 1;
+}
+
+/* Header styling */
+.header {
+    position: absolute;
+    top: 20px; /* Adjust this value to position the heading as desired */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-align: center;
+}
+
+.header h1 {
+    font-family: var(--unique-font);
+    font-size: 3rem; /* Adjust size as needed */
+    color: #080808; /* Dark color for visibility */
+}
+
+/* Logo styling */
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.logo img {
+    width: var(--logo-size);
+    height: auto;
+}
+
+/* Content styling */
+.content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 60px); /* Adjust to account for the height of the heading */
+}
+
+h1 {
+    font-family: var(--unique-font);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    background-color: var(--button-color);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: var(--button-hover-color);
+}
